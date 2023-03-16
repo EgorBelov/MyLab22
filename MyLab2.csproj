@@ -52,17 +52,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AddDish.cs">
+    <Compile Include="Pages\AddRent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pages\AddDish.Designer.cs">
-      <DependentUpon>AddDish.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\AddMeal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pages\AddMeal.Designer.cs">
-      <DependentUpon>AddMeal.cs</DependentUpon>
+    <Compile Include="Pages\AddRent.Designer.cs">
+      <DependentUpon>AddRent.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\AddPerson.cs">
       <SubType>Form</SubType>
@@ -76,17 +70,11 @@
     <Compile Include="Pages\AddProduct.Designer.cs">
       <DependentUpon>AddProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UpdateDish.cs">
+    <Compile Include="Pages\UpdateRent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pages\UpdateDish.Designer.cs">
-      <DependentUpon>UpdateDish.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\UpdateMeal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pages\UpdateMeal.Designer.cs">
-      <DependentUpon>UpdateMeal.cs</DependentUpon>
+    <Compile Include="Pages\UpdateRent.Designer.cs">
+      <DependentUpon>UpdateRent.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\UpdatePerson.cs">
       <SubType>Form</SubType>
@@ -94,22 +82,19 @@
     <Compile Include="Pages\UpdatePerson.Designer.cs">
       <DependentUpon>UpdatePerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UpdateProduct.cs">
+    <Compile Include="Pages\UpdateItem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pages\UpdateProduct.Designer.cs">
-      <DependentUpon>UpdateProduct.cs</DependentUpon>
+    <Compile Include="Pages\UpdateItem.Designer.cs">
+      <DependentUpon>UpdateItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\AddDish.resx">
-      <DependentUpon>AddDish.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\AddMeal.resx">
-      <DependentUpon>AddMeal.cs</DependentUpon>
+    <EmbeddedResource Include="Pages\AddRent.resx">
+      <DependentUpon>AddRent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\AddPerson.resx">
       <DependentUpon>AddPerson.cs</DependentUpon>
@@ -117,17 +102,14 @@
     <EmbeddedResource Include="Pages\AddProduct.resx">
       <DependentUpon>AddProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\UpdateDish.resx">
-      <DependentUpon>UpdateDish.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\UpdateMeal.resx">
-      <DependentUpon>UpdateMeal.cs</DependentUpon>
+    <EmbeddedResource Include="Pages\UpdateRent.resx">
+      <DependentUpon>UpdateRent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\UpdatePerson.resx">
       <DependentUpon>UpdatePerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\UpdateProduct.resx">
-      <DependentUpon>UpdateProduct.cs</DependentUpon>
+    <EmbeddedResource Include="Pages\UpdateItem.resx">
+      <DependentUpon>UpdateItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -39,9 +39,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(32, 47);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.Size = new System.Drawing.Size(71, 13);
             this.label1.TabIndex = 11;
-            this.label1.Text = "Введите продукт";
+            this.label1.Text = "Введите item";
             // 
             // textBox1
             // 
@@ -81,7 +81,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Name = "AddProduct";
-            this.Text = "AddProduct";
+            this.Text = "AddItem";
             this.Load += new System.EventHandler(this.AddGroup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

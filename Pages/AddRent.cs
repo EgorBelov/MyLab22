@@ -12,10 +12,10 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace MyLab2.Pages
 {
-    public partial class AddDish : Form
+    public partial class AddRent : Form
     {
         public int mealId;
-        public AddDish()
+        public AddRent()
         {
             InitializeComponent();
         }
@@ -25,10 +25,10 @@ namespace MyLab2.Pages
             using (var cn = new SqlConnection(Form1.cs))
             {
                 cn.Open();
-                var sql = @"INSERT INTO dishes (meal_Id, name) VALUES (@mealId, @name);";
+                var sql = @"INSERT INTO rent (person_Id, name) VALUES (@mealId, @name);";
 
                 var cmd = new SqlCommand(sql, cn);
-                cmd.Parameters.AddWithValue("@Name", textBox1.Text);
+                cmd.Parameters.AddWithValue("@name", textBox1.Text);
                 cmd.Parameters.AddWithValue("@mealId", mealId);
                 cmd.ExecuteNonQuery();
 

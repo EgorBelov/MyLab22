@@ -15,7 +15,7 @@ namespace MyLab2
 {
     public partial class Form1 : Form
     {
-        public static string cs = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = FoodIntakes; Integrated Security = true";
+        public static string cs = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Rent; Integrated Security = true";
         public Form1()
         {
             InitializeComponent();
@@ -44,42 +44,20 @@ namespace MyLab2
                     n.Tag = dr["id"];
                     n.Name = (string)dr["Name"];
                     treeView1.Nodes.Add(n);
-                    LoadMeals((int)dr["id"], n);
+                    LoadRents((int)dr["id"], n);
                 }
             }
             
         }
-        public void LoadMeals(int personId, TreeNode parent)
+        public void LoadRents(int personId, TreeNode parent)
         {
             using (SqlConnection cn = new SqlConnection(cs))
             {
                 cn.Open();
-                var sql = @"select  meals.meal_time, meals.id from meals
-                                            where meals.person_id = @persinId;";
+                var sql = @"select  rent.name, rent.id from rent
+                                            where rent.person_id = @personId;";
                 var cmd = new SqlCommand(sql, cn);
-                cmd.Parameters.AddWithValue("@persinId", personId);
-
-
-                var dr = cmd.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    TreeNode n = new TreeNode(dr["meal_time"].ToString());
-                    n.Tag = dr["id"];
-                    parent.Nodes.Add(n);
-                    LoadDishes((int)dr["id"], n);
-                }
-            }
-        }
-        public void LoadDishes(int mealId, TreeNode parent)
-        {
-            using (SqlConnection cn = new SqlConnection(cs))
-            {
-                cn.Open();
-                var sql = @"select dishes.name, dishes.id from dishes
-                                    where dishes.meal_id = @mealId;";
-                var cmd = new SqlCommand(sql, cn);
-                cmd.Parameters.AddWithValue("@mealId", mealId);
+                cmd.Parameters.AddWithValue("@personId", personId);
 
 
                 var dr = cmd.ExecuteReader();
@@ -89,19 +67,19 @@ namespace MyLab2
                     TreeNode n = new TreeNode(dr["name"].ToString());
                     n.Tag = dr["id"];
                     parent.Nodes.Add(n);
-                    LoadProducts((int)dr["id"], n);
+                    LoadItems((int)dr["id"], n);
                 }
             }
         }
-        public void LoadProducts(int dishId, TreeNode parent)
+        public void LoadItems(int itemId, TreeNode parent)
         {
             using (SqlConnection cn = new SqlConnection(cs))
             {
                 cn.Open();
-                var sql = @"select products.name, products.id from products
-                                            where products.dish_id = @dishId;";
+                var sql = @"select item.name, item.id from item
+                                    where item.rent_id = @itemId;";
                 var cmd = new SqlCommand(sql, cn);
-                cmd.Parameters.AddWithValue("@dishId", dishId);
+                cmd.Parameters.AddWithValue("@itemId", itemId);
 
 
                 var dr = cmd.ExecuteReader();
@@ -111,9 +89,11 @@ namespace MyLab2
                     TreeNode n = new TreeNode(dr["name"].ToString());
                     n.Tag = dr["id"];
                     parent.Nodes.Add(n);
+                 
                 }
             }
         }
+        
 
         private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -141,7 +121,7 @@ namespace MyLab2
                 using (var cn = new SqlConnection(cs))
                 {
                     cn.Open();
-                    var sql = @"delete from meals where id = @id;";
+                    var sql = @"delete from rent where id = @id;";
 
                     var cmd = new SqlCommand(sql, cn);
                     cmd.Parameters.AddWithValue("@id", treeView1.SelectedNode.Tag);
@@ -157,23 +137,7 @@ namespace MyLab2
                 using (var cn = new SqlConnection(cs))
                 {
                     cn.Open();
-                    var sql = @"delete from dishes where id = @id;";
-
-                    var cmd = new SqlCommand(sql, cn);
-                    cmd.Parameters.AddWithValue("@id", treeView1.SelectedNode.Tag);
-
-                    cmd.ExecuteNonQuery();
-                    treeView1.SelectedNode.Remove();
-                    LoadPersons();
-                }
-            }
-
-            if (treeView1.SelectedNode != null && treeView1.SelectedNode.Level == 3)
-            {
-                using (var cn = new SqlConnection(cs))
-                {
-                    cn.Open();
-                    var sql = @"delete from products where id = @id;";
+                    var sql = @"delete from item where id = @id;";
 
                     var cmd = new SqlCommand(sql, cn);
                     cmd.Parameters.AddWithValue("@id", treeView1.SelectedNode.Tag);
@@ -189,24 +153,18 @@ namespace MyLab2
 
         private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
+           
             if (treeView1.SelectedNode.Level == 0)
             {
-                AddMeal addMeal = new AddMeal();
-                addMeal.personId = (int)treeView1.SelectedNode.Tag;
-                addMeal.ShowDialog();
-                LoadPersons();
-            }
-            else if (treeView1.SelectedNode.Level == 1)
-            {
-                AddDish addDish = new AddDish();
+                AddRent addDish = new AddRent();
                 addDish.mealId = (int)treeView1.SelectedNode.Tag;
                 addDish.ShowDialog();
                 LoadPersons();
             }
-            else if (treeView1.SelectedNode.Level == 2)
+            else if (treeView1.SelectedNode.Level == 1)
             {
                 AddProduct addProduct = new AddProduct();
-                addProduct.dishId = (int)treeView1.SelectedNode.Tag;
+                addProduct.rentId = (int)treeView1.SelectedNode.Tag;
                 addProduct.ShowDialog();
                 LoadPersons();
             }
@@ -258,19 +216,13 @@ namespace MyLab2
             }
             else if (treeView1.SelectedNode.Level == 1)
             {
-                UpdateMeal updateMeal = new UpdateMeal((int)treeView1.SelectedNode.Tag);
-                updateMeal.ShowDialog();
+                UpdateRent updateDish = new UpdateRent((int)treeView1.SelectedNode.Tag);
+                updateDish.ShowDialog();
                 LoadPersons();
             }
             else if (treeView1.SelectedNode.Level == 2)
             {
-                UpdateDish updateDish = new UpdateDish((int)treeView1.SelectedNode.Tag);
-                updateDish.ShowDialog();
-                LoadPersons();
-            }
-            else if (treeView1.SelectedNode.Level == 3)
-            {
-                UpdateProduct updateProduct = new UpdateProduct((int)treeView1.SelectedNode.Tag);
+                UpdateItem updateProduct = new UpdateItem((int)treeView1.SelectedNode.Tag);
                 updateProduct.ShowDialog();
                 LoadPersons();
             }

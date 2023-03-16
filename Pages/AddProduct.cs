@@ -18,18 +18,18 @@ namespace MyLab2.Pages
             InitializeComponent();
         }
 
-        public int dishId;
+        public int rentId;
         
         private void button1_Click(object sender, EventArgs e)
         {
             using (var cn = new SqlConnection(Form1.cs))
             {
                 cn.Open();
-                var sql = @"INSERT INTO products (dish_Id, name, quantity) VALUES (@dishId, @name, 20);";
+                var sql = @"INSERT INTO item (rent_Id, name) VALUES (@rentId, @name);";
 
                 var cmd = new SqlCommand(sql, cn);
                 cmd.Parameters.AddWithValue("@name", textBox1.Text);
-                cmd.Parameters.AddWithValue("@dishId", dishId);
+                cmd.Parameters.AddWithValue("@rentId", rentId);
                 cmd.ExecuteNonQuery();
 
                 Close();

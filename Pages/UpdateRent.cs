@@ -11,25 +11,29 @@ using System.Windows.Forms;
 
 namespace MyLab2.Pages
 {
-    public partial class UpdateProduct : Form
+    public partial class UpdateRent : Form
     {
         int id;
+        public UpdateRent()
+        {
+            InitializeComponent();
+        }
+        public UpdateRent(int mid)
+        {
+            InitializeComponent();
+            id = mid;
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
-        public UpdateProduct()
-        {
-            InitializeComponent();
-        }
-        public UpdateProduct(int did)
-        {
-            InitializeComponent();
-            id = did;
-        }
         private void button1_Click(object sender, EventArgs e)
         {
             using (var cn = new SqlConnection(Form1.cs))
             {
                 cn.Open();
-                var sql = @"UPDATE products SET name = @Name WHERE products.id = @id";
+                var sql = @"UPDATE rent SET name = @Name WHERE rent.id = @id";
 
                 var cmd = new SqlCommand(sql, cn);
                 cmd.Parameters.AddWithValue("@Name", textBox1.Text);
@@ -40,18 +44,13 @@ namespace MyLab2.Pages
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void UpdateDish_Load(object sender, EventArgs e)
         {
-            Close();
-        }
-
-        private void UpdateProduct_Load(object sender, EventArgs e)
-        {
-            
+            Check();
             using (var cn = new SqlConnection(Form1.cs))
             {
                 cn.Open();
-                var sql = @"select products.name from products where products.id = @id";
+                var sql = @"select rent.name from rent where rent.id = @id";
 
                 var cmd = new SqlCommand(sql, cn);
                 cmd.Parameters.AddWithValue("@id", id);
@@ -63,6 +62,20 @@ namespace MyLab2.Pages
                 }
             }
         }
-
+        void Check()
+        {
+            if (textBox1.Text.Length == 0)
+            {
+                button1.Enabled = false;
+            }
+            else
+            {
+                button1.Enabled = true;
+            }
+        }
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            Check();
+        }
     }
 }
